@@ -33,12 +33,12 @@ public class JdbcPartV2 {
             // 对结果集解析
             while (resultSet.next()) {
                 // 当前行，columnIdex 指行下标，columLabel指列名
-                Object id = resultSet.getInt(1);
-                Object name = resultSet.getString("name");
-                Object gender = resultSet.getString("gender");
-                Object age = resultSet.getString("age");
+                Object id = resultSet.getObject(1);
+                Object account = resultSet.getObject("account");
+                Object nikename = resultSet.getObject("nikename");
+                Object password = resultSet.getObject("password");
 
-                System.out.println(id + "--" + name + "--" + gender + "--" + age);
+                System.out.println(id + "--" + account + "--" + nikename + "--" + password);
             }
             // 释放资源
             resultSet.close();

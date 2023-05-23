@@ -16,23 +16,22 @@ public class JdbcPart {
             // 注册驱动
             DriverManager.registerDriver(new Driver());
             // 获取连接
-            String url = "jdbc:mysql://localhost:3306/student_db";
+            String url = "jdbc:mysql://localhost:3306/jdbc_db";
             String user = "root";
             String password = "root8Snails";
             Connection connection = DriverManager.getConnection(url, user, password);
             // 创建statement
             Statement statement = connection.createStatement();
             // 发送 SQL 语句
-            String sql = "select * from students;";
+            String sql = "select * from t_user;";
             ResultSet resultSet = statement.executeQuery(sql);
             // 对结果集解析
             while (resultSet.next()) {
                 Object id = resultSet.getObject("id");
-                Object name = resultSet.getObject("name");
-                Object gender = resultSet.getObject("gender");
-                Object age = resultSet.getObject("age");
+                Object account = resultSet.getObject("account");
+                Object nikename = resultSet.getObject("nikename");
 
-                System.out.println(id + "--" + name + "--" + gender + "--" + age);
+                System.out.println(id + "--" + account + "--" + nikename);
             }
             // 释放资源
             resultSet.close();
