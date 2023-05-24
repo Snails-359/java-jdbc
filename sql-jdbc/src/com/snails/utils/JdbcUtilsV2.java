@@ -11,7 +11,7 @@ import java.util.Properties;
 
 /**
  * @description: JDBC 工具类；内部包含一个连接池对象，并对外提供一个获取连接和回收连接的方法。
- * V2.0更新：利用线程本地变量存储连接信息，确保一个线程的多个方法客户获取同一个 connection 连接！
+ * V2.0更新：利用线程本地变量存储连接信息，确保一个线程的多个方法获取同一个 connection 连接！
  * 优势：解决事务操作时 service 和 dao 同一个线程，传递参数问题
  * @author: Snails
  * @create: 2023-05-24 20:31
