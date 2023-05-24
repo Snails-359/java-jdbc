@@ -6,12 +6,12 @@ import java.sql.*;
 import java.util.*;
 
 /**
- * @description: 使用preparedStatement()进行 CURD 操作
+ * @description: 优化executeUpdate()返回结果集解析，使结果集解析方法具有通用性
  * @author: Snails
  * @create: 2023-05-23 19:21
- * @version: v3.0
+ * @version: v3.1
  */
-public class StatementCURDPartTest {
+public class StatementPartTest {
     @Test
     public void InsertTest() {
         try {
@@ -129,14 +129,28 @@ public class StatementCURDPartTest {
             // 发送 SQL 语句
             ResultSet resultSet = preparedStatement.executeQuery();
             // 结果集解析
+            // 1、创建结果集的接收对象集合
             List<Map> list = new ArrayList<>();
+            // 2、获取当前结果集列的对象
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            // 3、获取列的长度，便于水平遍历
+            int columnCount = metaData.getColumnCount();
+            // 4、遍历结果集
             while (resultSet.next()) {
+                // 4.1、创建当前列的接收对象
                 Map map = new HashMap();
-                map.put("id", resultSet.getInt("id"));
-                map.put("account", resultSet.getString("account"));
-                map.put("nikename", resultSet.getString("nikename"));
-                map.put("password", resultSet.getString("password"));
+                // 4.2、遍历当前列
+                for (int i = 1; i <= columnCount; i++) {
+                    // s获取指定列下角标的列明
+                    String columnLabel = metaData.getColumnLabel(i);
+                    // 获取指定列下角标的值
+                    Object value = resultSet.getObject(i);
+                    // 将列的信息存储到 map 中
+                    map.put(columnLabel, value);
+                }
+                // 5、将 map整行数据存储到集合中
                 list.add(map);
+
             }
             System.out.println("list" + list);
             // 释放资源
