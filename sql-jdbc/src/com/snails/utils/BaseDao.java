@@ -81,7 +81,7 @@ public abstract class BaseDao {
             // 调用类的构造器实例化结果集对象。
             T t = clazz.getDeclaredConstructor().newInstance();
             // 遍历当前指定列
-            for (int i = 1; i < columnCount; i++) {
+            for (int i = 1; i <= columnCount; i++) {
                 // 获取指定列下标的列的名称
                 String propertyName = metaData.getColumnLabel(i);
                 // 获取指定列下标的列的属性值

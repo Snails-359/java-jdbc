@@ -35,7 +35,7 @@ public class JdbcUtilsV2 {
         }
         //  创建连接，工厂模式
         try {
-            DataSource dataSource = DruidDataSourceFactory.createDataSource(properties);
+            dataSource = DruidDataSourceFactory.createDataSource(properties);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
